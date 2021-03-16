@@ -18,7 +18,7 @@ Auth::routes();
 
 // Route::view('/', 'main');
 Route::get('/', 'MainController@index') -> name('main');
-Route::view('/products', 'products');
+Route::view('/shop', 'shop');
 Route::view('/product', 'product');
 Route::view('/cart', 'cart');
 Route::view('/checkout', 'checkout');
