@@ -1,10 +1,19 @@
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Fontawesome
+@import '~@fortawesome/fontawesome-free/css/all.css';
 
 // Variables
 @import 'variables';
 
-// Bootstrap
+Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
 
@@ -38,6 +47,7 @@
 // Pages
 @import 'pages/main';
 @import 'pages/shop';
+@import 'pages/mountain';
 // @import 'pages/product';
 // @import 'pages/cart';
 // @import 'pages/checkout';
