@@ -10,6 +10,7 @@
   height: 100%;
   width: 100vw;
   max-width: 100%;
+  transition: margin-right 0.6s;
 }
 
 .nav-laterale-cont{
@@ -18,11 +19,15 @@
   overflow: hidden;
   z-index: 40;
   position: fixed;
-  height: 100%;
+  min-height: 100%;
   display: none;
   @media only screen and (min-width: 1024px){
     right: 0;
-    width: 320px;
+    width: 300px;
+  }
+  @media only screen and (max-width: 1023px){
+    right: 0;
+    width: 100vw;
   }
 }
 
@@ -40,6 +45,14 @@
   flex-direction: column;
   // min-height: 100%;
   min-height: 827px;
+  height: 100%;
+  background-color: #f8f8f8;
+  @media only screen and (max-width: 1023px){
+    right: 0;
+    width: 100vw;
+    min-height: 100vh;
+    padding: 0;
+  }
   .menu-lat-link{
     opacity: 1;
     visibility: inherit;
@@ -52,7 +65,14 @@
     align-items: center;
     color: #3a3a52;
   }
+  .top{
+    flex-grow: 1;
+    @media only screen and (max-width: 1023px){
+      padding: 70px 0 0 50px;
+    }
+  }
   .middle{
+    flex-shrink: 2;
     margin-bottom: 24px;
     opacity: 1;
     visibility: inherit;
@@ -62,11 +82,13 @@
     text-align: center;
     @media only screen and (min-width: 1024px){
       flex-direction: column;
+      padding: 70px 0 0 50px;
     }
     border-bottom: 2px solid grey;
   }
 
   .bottom{
+    flex-grow: 1;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -76,13 +98,42 @@
       height: 40px;
       margin: 5px 8px;
     }
+    @media only screen and (max-width: 1023px){
+      padding: 70px 0 0 50px;
+    }
   }
 }
 
 // hamb icona
 .hamb-icon{
+  cursor: pointer;
   position: absolute;
   z-index: 39;
   top: 50px;
   right: 100px;
+}
+// icona per chiudere menu lat
+.close-icon{
+  cursor: pointer;
+  position: absolute;
+  z-index: 39;
+  top: 10px;
+  right: 30px;
+}
+
+.active{
+  display: block;
+}
+
+// transition slide
+.slide-enter-active, .slide-leave-active {
+  transition: all 2s;
+}
+.slide-enter {
+  transform: translateX(-100%);
+  transition: all 150ms ease-in 0s;
+}
+.slide-leave-to{
+  transform: translateX(100%);
+  transition: all 150ms ease-out 2s;
 }

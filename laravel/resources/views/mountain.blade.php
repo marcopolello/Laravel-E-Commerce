@@ -11,69 +11,78 @@
 
       <div id="layout-mountain">
 
-        <div class="nav-laterale-cont">
-
-          <div class="menu-lay-bg-absolute">
-
+        <div v-bind:class="{ active: showNavLat}" class="nav-laterale-cont">
+          <div @click="toggleNavLat()" class="close-icon">
+            <i class="fas fa-times fa-3x"></i>
           </div>
-          {{-- contenuto menu laterale --}}
-          <div class="menu-lat-content">
 
-            <div class="top">
+          <transition-group name="slide" tag="div">
 
-              <a class="menu-lat-link" href="{{route('main')}}">Home</a>
+            <div v-if="showNavLat" v-bind:key="div" class="menu-lay-bg-absolute">
 
-              <button class="menu-lat-link" type="button" name="button">Settings</button>
+            </div>
+            {{-- contenuto menu laterale --}}
+            <div v-if="showNavLat" v-bind:key="contentMenu" class="menu-lat-content">
 
-              <a class="menu-lat-link" href="#">About</a>
-              <a class="menu-lat-link" href="#">Credits</a>
+              <div class="top">
+
+                <a class="menu-lat-link" href="{{route('main')}}">Home</a>
+
+                <button class="menu-lat-link" type="button" name="button">Settings</button>
+
+                <a class="menu-lat-link" href="#">About</a>
+                <a class="menu-lat-link" href="#">Credits</a>
+
+              </div>
+
+              <div class="middle">
+
+                <img src="" class="guide">
+
+                </img>
+
+                <p>Guida completa degli itinerari</p>
+
+              </div>
+
+
+              <div class="bottom">
+
+                <div class="logo">
+
+                </div>
+                <div class="logo">
+
+                </div>
+                <div class="logo">
+
+                </div>
+                <div class="logo">
+
+                </div>
+
+                <div class="logo">
+
+                </div>
+                <div class="logo">
+
+                </div>
+
+              </div>
+
+
 
             </div>
 
-            <div class="middle">
-
-              <img src="" class="guide">
-
-              </img>
-
-              <p>Guida completa degli itinerari</p>
-
-            </div>
-
-
-            <div class="bottom">
-
-              <div class="logo">
-
-              </div>
-              <div class="logo">
-
-              </div>
-              <div class="logo">
-
-              </div>
-              <div class="logo">
-
-              </div>
-
-              <div class="logo">
-
-              </div>
-              <div class="logo">
-
-              </div>
-
-            </div>
-
-
-
-          </div>
+          </transition-group>
 
         </div>
 
-        <div class="hamb-icon">
 
-          <i class="fas fa-bars fa-4x"></i>
+
+        <div @click="toggleNavLat()" class="hamb-icon">
+
+          <i class="fas fa-bars fa-3x"></i>
 
         </div>
 
