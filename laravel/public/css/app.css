@@ -10942,6 +10942,11 @@ a.text-dark:focus {
   }
 }
 
+.prod-img {
+  height: auto;
+  width: 200px;
+}
+
 .featured-section {
   padding: 50px 0;
 }
@@ -10981,6 +10986,11 @@ a.text-dark:focus {
 
 .blog-section .blog-posts #blog3 {
   grid-area: blog3;
+}
+
+.prod-img {
+  height: auto;
+  width: 200px;
 }
 
 .products-section {

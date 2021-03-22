@@ -69,7 +69,7 @@
                         @foreach ($products as $product)
                             <div class="product">
                                 <a href="{{ route('main', $product->slug) }}">
-                                  <img src="" alt="product">
+                                  <img class="prod-img" src="storage\product_image\{{ $product -> photo}}" alt="product">
                                 </a>
                                 <a href="{{ route('main', $product->slug) }}">
                                   <div class="product-name">{{ $product->name }}

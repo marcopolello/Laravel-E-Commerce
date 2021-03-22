@@ -53,6 +53,21 @@
             </div>
 
             <div class="products text-center">
+              @foreach ($products as $key => $product)
+                <div class="product">
+                  <a href="#">
+                    <img class="prod-img" src="storage\product_image\{{ $product -> photo}}" alt="product">
+                  </a>
+                  <a href="#">
+                    <div class="products-name">
+                      {{ $product -> name }}
+                    </div>
+                  </a>
+                  <div class="products-price">
+                    {{ $product -> asDollars()}}
+                  </div>
+                </div>
+              @endforeach
                 {{-- @forelse ($products as $product)
                     <div class="product">
                         <a href="{{ route('shop.show', $product->slug) }}"><img src="{{ productImage($product->image) }}" alt="product"></a>
