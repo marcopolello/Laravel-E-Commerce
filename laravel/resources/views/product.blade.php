@@ -37,7 +37,7 @@
     <div class="product-section container">
         <div>
             <div class="product-section-image">
-                <img src="storage\product_image\{{ $product -> photo}}" alt="product" class="active" id="currentImage">
+                <img src="{{ productImage($product->image) }}" alt="product" class="active" id="currentImage">
             </div>
             <div class="product-section-images">
                 <div class="product-section-thumbnail selected">

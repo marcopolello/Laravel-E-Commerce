@@ -2,9 +2,9 @@
     <div class="top-nav container">
       <div class="top-nav-left">
           <div class="logo"><a href="/">Ecommerce</a></div>
-          {{-- @if (! (request()->is('checkout') || request()->is('guestCheckout')))
+          @if (! (request()->is('checkout') || request()->is('guestCheckout')))
           {{ menu('main', 'partials.menus.main') }}
-          @endif --}}
+          @endif
       </div>
       <div class="top-nav-right">
           @if (! (request()->is('checkout') || request()->is('guestCheckout')))
