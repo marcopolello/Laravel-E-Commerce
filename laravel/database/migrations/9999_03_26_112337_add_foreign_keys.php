@@ -13,6 +13,12 @@ class AddForeignKeys extends Migration
      */
     public function up()
     {
+      Schema::table('orders', function(Blueprint $table){
+        $table  ->foreign('user_id', 'order_user')
+                ->references('id')
+                ->on('users');
+      });
+
       Schema::table('category_product', function (Blueprint $table) {
         $table  ->foreign('category_id', 'cp_category')
                 ->references('id')
@@ -49,6 +55,10 @@ class AddForeignKeys extends Migration
       Schema::table('category_product', function (Blueprint $table) {
         $table ->dropForeign('cp_product');
         $table ->dropForeign('cp_category');
+      });
+
+      Schema::table('orders', function (Blueprint $table) {
+        $table  ->dropForeign('order_user');
       });
     }
 }
