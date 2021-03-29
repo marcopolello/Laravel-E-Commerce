@@ -39,6 +39,12 @@
                     <i class='bx bx-plus'></i>
                 </Button>
             </div>
+
+            <!-- <div class="con-close">
+              <Button @click="plusLess('plus')" class="plus">
+                  <i class='bx bx-close'></i>
+              </Button>
+            </div> -->
         </div>
       </div>
     </div>

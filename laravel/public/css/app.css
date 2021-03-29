@@ -37759,6 +37759,7 @@ input[type=color].form-control:disabled {
 }
 
 .products-container {
+  max-width: 80vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -37773,7 +37774,7 @@ input[type=color].form-control:disabled {
 }
 
 .products-container .product-cont img {
-  max-width: 200px;
+  max-width: 230px;
   width: auto;
   max-height: 200px;
 }
