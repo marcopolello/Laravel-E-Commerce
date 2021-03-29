@@ -1,17 +1,19 @@
 <template>
-    <div class="product-cont">
+    <div class="product">
       <div class="con-cards-1 con-cards card">
         <!-- <div class="con-star">
             <i class='bx bx-star'></i>
         </div> -->
-        <div class="con-image">
+        <a :href="route">
+          <div class="con-image">
             <img class="img" :src="'storage/product_photo/' + this.photo" alt="">
             <img class="bg" :src="'storage/product_photo/' + this.photo" alt="">
-        </div>
+          </div>
+        </a>
 
         <div class="con-text">
             <h3>
-                {{this.name}}
+                {{this.nameAbbr}}
             </h3>
             <p>
                 {{this.name}}
@@ -19,7 +21,7 @@
         </div>
 
         <div class="con-price">
-            {{this.price}}
+            {{this.price}} €
         </div>
 
         <div class="con-btn">
@@ -53,6 +55,9 @@
          'description': this.product_data.description,
          'photo': this.product_data.photo,
          'id': this.product_data.id,
+         'nameAbbr': '',
+         // rotta x lo show
+         // 'route': '/product/' + this.product_data.id,
         };
       },
 
@@ -65,11 +70,17 @@
       },
 
       mounted() {
-          console.log(this.product_data);
+          console.log(this.product_data, this.route);
+          if (this.name.length > 15) {
+            this.nameAbbr = this.name.slice(0,15) + "..";
+          } else {
+            this.nameAbbr = this.name;
+          }
       },
 
       props: {
         product_data : Object,
+        route: String,
       },
 
       watch: {

@@ -14,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-      $products = Product::all();
+      // prendo 20 prodotti per passarli nella homepage
+      $products = Product::inRandomOrder()->limit(24)->get();
       foreach ($products as $key => $product) {
         $price = $product -> price;
         if(is_numeric($price)) {
@@ -74,7 +75,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('pages.prod-show', compact('product'));
     }
 
     /**
