@@ -10,33 +10,46 @@
 
     <div id="app">
 
-      <div class="products-container">
+      <div id="container">
 
-        @foreach ($products as $index => $product)
+        <div class="products-container">
 
-            <div class="product-cont">
+          @foreach ($products as $index => $product)
 
-              <product
-              :route= '@json(route("product-show", $product -> id))'
-              :product_data= '{{$product}}'
-              >
-              </product>
+              <div class="product-cont">
 
+                <product
+                :route= '@json(route("product-show", $product -> id))'
+                :product_data= '{{$product}}'
+                @@carrello='pushInCart($event)'
+                >
+                </product>
+
+              </div>
+
+
+          @endforeach
+
+          {{-- per fronterd poteri fare una riga che scorre a dx e una a sx --}}
+
+        </div>
+
+        <div class="basket-summary">
+          <h1>SOMMARIO-CARRELLO:</h1>
+
+          <div v-for='item in cart_new' class="item-cart-row">
+            <div class="item-cart-row-left">
+              <i class="far fa-minus-square change_quantity"></i>
+              <span class="item_cart_quant">@{{item.quantity}}</span>
+              <i  class="far fa-plus-square change_quantity"></i>
+              <span class="item_cart_name">@{{item.name}}</span>
             </div>
+            <div class="item-cart-row-right">
+              <span class="item_cart_price">@{{item.price}}€</span>
+            </div>
+          </div>
 
-
-        @endforeach
-
-        {{-- per fronterd poteri fare una riga che scorre a dx e una a sx --}}
-
-        {{-- @foreach ($products as $index => $product)
-
-          <product
-          :product_data= '{{$product}}'
-          >
-        </product>
-
-        @endforeach --}}
+        </div>
 
       </div>
 

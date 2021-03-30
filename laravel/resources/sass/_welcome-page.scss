@@ -1,17 +1,30 @@
-.products-container{
-  max-width: 80vw;
-  a{
-    text-decoration: none;
-  }
+#container{
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  .product-cont{
-    margin: 10px 0;
-    img{
-      max-width: 230px;
-      width: auto;
-      max-height: 200px;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  .products-container{
+    order: 1;
+    flex-basis: 80vw;
+    a{
+      text-decoration: none;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .product-cont{
+      margin: 10px 0;
+      img{
+        max-width: 230px;
+        width: auto;
+        max-height: 200px;
+      }
     }
   }
+  .basket-summary{
+    order: 2;
+    flex-basis: 20vw;
+    // debuggg
+    background-color: blue;
+  }
+
 }

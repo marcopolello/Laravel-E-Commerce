@@ -34,17 +34,20 @@
                 <Button @click="plusLess('less')" class="less">
                     <i class='bx bx-minus' ></i>
                 </Button>
-                <input value="1" type="text">
+                <input v-model="quantity" type="text">
                 <Button @click="plusLess('plus')" class="plus">
                     <i class='bx bx-plus'></i>
                 </Button>
             </div>
 
-            <!-- <div class="con-close">
-              <Button @click="plusLess('plus')" class="plus">
-                  <i class='bx bx-close'></i>
+            <div class="con-input-btns down">
+              <Button @click="close()" class="close">
+                <i class='bx bxs-x-circle' ></i>
               </Button>
-            </div> -->
+              <Button @click="emitInCart()" class="check">
+                  <i class='bx bxs-check-circle'></i>
+              </Button>
+            </div>
         </div>
       </div>
     </div>
@@ -64,6 +67,10 @@
          'nameAbbr': '',
          // rotta x lo show
          // 'route': '/product/' + this.product_data.id,
+
+         // mi serve un contatore x la quantità
+         'quantity': 0,
+         'product': {},
         };
       },
 
@@ -76,7 +83,7 @@
       },
 
       mounted() {
-          console.log(this.product_data, this.route);
+          // console.log(this.product_data, this.route);
           if (this.name.length > 15) {
             this.nameAbbr = this.name.slice(0,15) + "..";
           } else {
@@ -94,10 +101,38 @@
       },
 
       methods: {
+        emitInCart: function () {
+          if (this.quantity) {
+
+          }
+          let product = {};
+          for (let i = 0; i < this.quantity; i++) {
+
+            product = {
+              "id": this.id,
+              "price" : this.price,
+              "name": this.name,
+              "slug": this.slug,
+              "details": this.details,
+              "description": this.description,
+              "photo": this.photo,
+              "quantity": this.quantity,
+            };
+            // manda al padre un oggetto con dati del prodotto
+            this.$emit('carrello', product);
+            // logggg
+            console.log(product, this.quantity);
+          }
+        },
+        close: function () {
+          const card = event.target.closest('.card')
+          card.classList.remove('add-active')
+        },
         handleAdd : function () {
           const card = event.target.closest('.card')
           card.classList.add('add-active')
-          console.log(card)
+          // console.log(card)
+          this.quantity++;
         },
         plusLess: function (type) {
           const card = event.target.closest('.card')
@@ -106,13 +141,21 @@
           if (type == 'less') {
               if (oldVal == 1) {
                   card.classList.remove('add-active')
+                  this.quantity = 0;
+                  this.product = {};
+                  console.log(this.quantity);
                   return
               }
               input.value = oldVal -= 1
+              this.quantity--;
+              console.log(this.quantity);
           } else {
               input.value = oldVal += 1
+              this.quantity++;
+              console.log(this.quantity);
           }
-        }
+        },
+
       },
 
     }
