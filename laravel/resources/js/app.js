@@ -15,11 +15,13 @@ const app = new Vue({
     mounted: function () {
      this.$nextTick(function () {
        // console.log("App montata!");
+       // this.update();
      })},
     data: {
         products: [],
         cart: [],
-        categorySelected: '',
+        categorySelected: 'tutti',
+        categories: [],
     },
     computed: {
       // evitare che lo stesso prodotto vewnga stampato più volte
@@ -27,29 +29,62 @@ const app = new Vue({
 
         let newCart = [];
         this.cart.forEach((product, i) => {
+          // console.log(this.cart);
+          let counter = 0;
           // console.log(product);
-          newCart.push(
-            {
-              "id": product.id,
-              "price" : product.price,
-              "name": product.name,
-              "slug": product.slug,
-              "details": product.details,
-              "description": product.description,
-              "photo": product.photo,
+
+          this.cart.forEach((product_confronto, i) => {
+            if (product.id == product_confronto.id) {
+              counter ++;
             }
-          );
+          });
+
+          if (!newCart.some(product_new_cart => product_new_cart.id == product.id)) {
+
+              newCart.push(
+                {
+                  "id": product.id,
+                  "price" : product.price,
+                  "total_price" : (parseFloat(counter) * parseFloat(product.price)).toFixed(2),
+                  "name": product.name,
+                  "slug": product.slug,
+                  "details": product.details,
+                  "description": product.description,
+                  "photo": product.photo,
+                  "quantity": counter,
+                }
+              );
+            }
         });
-        console.log(newCart);
+        // console.log(newCart);
         return newCart;
       },
+      total: function() {
 
+          let total = 0;
+          for (let i = 0; i < this.cart_new.length; i++) {
+            total += parseFloat(this.cart_new[i].total_price);
+          }
+          return total.toFixed(2);
+        }
     },
 
     watch: {
 
     },
     methods: {
+
+      // metodi per debuggare
+
+      showCart: function() {
+        console.log(this.cart);
+      },
+      update: function() {
+        axios.get('')
+        .then(response => {
+          ;
+        }) ;
+      },
 
       pushInCart: function(product) {
         this.cart.push(product);
@@ -63,7 +98,7 @@ const app = new Vue({
       },
 
 
-      remove_plate: function(plate){
+      remove_product: function(product){
 
         let plate_index = -1;
         this.cart.forEach((item, i) => {
@@ -78,17 +113,17 @@ const app = new Vue({
         this.$forceUpdate();
       },
 
-      add_plate: function(plate){
+      add_product: function(product){
         // console.log(plate);
-        let newPlate = {
+        let newProduct = {
           "plate_id": plate.plate_id,
           "original_price": plate.original_price,
           "plate_price": plate.original_price,
           "plate_name": plate.plate_name,
           "delivery_cost": plate.delivery_cost,
         };
-        // console.log(newPlate);
-        this.cart.push(newPlate);
+        // console.log(newProduct);
+        this.cart.push(newProduct);
         this.$forceUpdate();
       },
 

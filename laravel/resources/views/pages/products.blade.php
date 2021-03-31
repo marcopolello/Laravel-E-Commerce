@@ -5,10 +5,12 @@
     <title>Welcome</title>
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.6/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
 
     <div id="app">
+      <button style="margin: 20px; padding: 20px;" @click="showCart()" type="button" name="button">cosa c'è dentro al carrello</button>
 
       <div id="container">
 
@@ -19,31 +21,45 @@
               <option value="tutti">tutti</option>
               @foreach ($categories as $category)
                 <option
-                 value="{{$category -> category}}">{{$category -> category}}</option>
+                 value="{{$category -> id}}"
+                 >
+                 {{$category -> category}} {{$category -> id}}
+                </option>
               @endforeach
             </select>
 
             <h1>@{{ categorySelected }}</h1>
+            {{-- <p>@{{categories}}</p> --}}
 
           </div>
 
           @foreach ($products as $index => $product)
             @foreach ($product -> categories as $category)
-              @if ($category -> id == 16)
-                {{-- <p>{{ $category }}</p> --}}
+              {{-- <p>{{$category -> id}}</p> --}}
 
-                <div class="product-cont">
+                <div v-if="categorySelected == 'tutti'" class="product-cont">
 
                   <product
+                  :category='{{$category}}'
                   :route= '@json(route("product-show", $product -> id))'
                   :product_data= '{{$product}}'
                   @@carrello='pushInCart($event)'
                   >
-                </product>
+                  </product>
 
-              </div>
+                </div>
 
-              @endif
+                <div v-if="categorySelected == {{$category -> id}}"
+                class="product-cont"  >
+                  <product
+                  :category='{{$category}}'
+                  :route= '@json(route("product-show", $product -> id))'
+                  :product_data= '{{$product}}'
+                  @@carrello='pushInCart($event)'
+                  >
+                  </product>
+                </div>
+
             @endforeach
 
           @endforeach
@@ -58,14 +74,28 @@
           <div v-for='item in cart_new' class="item-cart-row">
             <div class="item-cart-row-left">
               <i class="far fa-minus-square change_quantity"></i>
-              <span class="item_cart_quant">@{{item.quantity}}</span>
+              <span class="item_cart_quant">quantità selezionata: @{{item.quantity}}</span>
+              <br>
               <i  class="far fa-plus-square change_quantity"></i>
-              <span class="item_cart_name">@{{item.name}}</span>
+              <span class="item_cart_name">nome prodotto: @{{item.name}}</span>
             </div>
             <div class="item-cart-row-right">
-              <span class="item_cart_price">@{{item.price}}€</span>
+              <span class="item_cart_price">prezzo ad unità: @{{item.price}}€</span>
             </div>
           </div>
+
+          <div class="cart_costs">
+
+            <button class="reset_cart" @click='reset_cart()'>
+              Svuota carrello
+            </button>
+
+            <div class="total">
+              <span>Totale</span>
+              <span>@{{total}}€</span>
+            </div>
+
+            </div>
 
         </div>
 

@@ -12,7 +12,7 @@
         </a>
 
         <div class="con-text">
-            <h3>
+            <h3 @click="print()">
                 {{this.nameAbbr}}
             </h3>
             <p>
@@ -71,6 +71,9 @@
          // mi serve un contatore x la quantità
          'quantity': 0,
          'product': {},
+         // possono essere molteplici categorie e id
+         'prodCategories': this.category.category,
+         'idCategories': this.category.id,
         };
       },
 
@@ -79,13 +82,15 @@
       },
 
       created() {
-
+        let categories = {};
+        categories = this.prodCategories;
+        this.$emit('categorie', categories);
       },
 
       mounted() {
           // console.log(this.product_data, this.route);
-          if (this.name.length > 15) {
-            this.nameAbbr = this.name.slice(0,15) + "..";
+          if (this.name.length > 10) {
+            this.nameAbbr = this.name.slice(0,10) + "..";
           } else {
             this.nameAbbr = this.name;
           }
@@ -94,6 +99,7 @@
       props: {
         product_data : Object,
         route: String,
+        category: Object,
       },
 
       watch: {
@@ -121,7 +127,7 @@
             // manda al padre un oggetto con dati del prodotto
             this.$emit('carrello', product);
             // logggg
-            console.log(product, this.quantity);
+            // console.log(product, this.quantity);
           }
         },
         close: function () {
@@ -143,19 +149,22 @@
                   card.classList.remove('add-active')
                   this.quantity = 0;
                   this.product = {};
-                  console.log(this.quantity);
+                  // console.log(this.quantity);
                   return
               }
               input.value = oldVal -= 1
               this.quantity--;
-              console.log(this.quantity);
+              // console.log(this.quantity);
           } else {
               input.value = oldVal += 1
               this.quantity++;
-              console.log(this.quantity);
+              // console.log(this.quantity);
           }
         },
-
+        // metodo per debuggare
+        print: function () {
+          console.log(this.prodCategories, this.idCategories);
+        }
       },
 
     }
