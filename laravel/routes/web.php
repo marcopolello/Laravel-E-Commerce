@@ -3,7 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', 'ProductController@index')
+Route::get('/', 'Controller@index') -> name('welcome');
+
+Route::get('/products', 'ProductController@index')
 -> name('products');
 Route::get('/product/{id}', 'ProductController@show')
 -> name('product-show');

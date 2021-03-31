@@ -19,9 +19,10 @@ const app = new Vue({
     data: {
         products: [],
         cart: [],
+        categorySelected: '',
     },
     computed: {
-
+      // evitare che lo stesso prodotto vewnga stampato più volte
       cart_new: function() {
 
         let newCart = [];

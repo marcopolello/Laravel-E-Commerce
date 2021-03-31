@@ -1,5 +1,6 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
 
 // Variables
 @import 'variables';
@@ -18,12 +19,14 @@
 // @import 'node_modules/bootstrap/scss/bootstrap.scss';
 // @import 'node_modules/bootstrap-vue/src/index.scss';
 
+// home-page
+@import 'welcome-page';
 
 // NavBar
 @import 'navbar';
 
 // homepage con carte prodotto
-@import '_welcome-page';
+@import '_products';
 @import '_productcard';
 
 *{

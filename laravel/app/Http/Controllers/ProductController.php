@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Category;
 
 class ProductController extends Controller
 {
@@ -15,7 +16,14 @@ class ProductController extends Controller
     public function index()
     {
       // prendo 20 prodotti per passarli nella homepage
-      $products = Product::inRandomOrder()->limit(24)->get();
+      $products = Product::inRandomOrder()
+      ->with('categories')
+      ->limit(24)->get();
+
+      $categories = Category::all();
+
+      // dd($categories);
+
       foreach ($products as $key => $product) {
         $price = $product -> price;
         if(is_numeric($price)) {
@@ -43,7 +51,7 @@ class ProductController extends Controller
         $product -> price = $price;
       }
       // dd($price);
-      return view('welcome-page', compact('products'));
+      return view('pages.products', compact('products', 'categories'));
     }
 
     /**
